@@ -159,30 +159,15 @@ static NSCalendar *implicitCalendar = nil;
         }
         
     } else {
-        NSUInteger bigUnits = NSCalendarUnitTimeZone | NSCalendarUnitDay | NSCalendarUnitWeekOfYear | NSCalendarUnitMonth | NSCalendarUnitYear;
-        
-        NSDateComponents *components = [calendar components:bigUnits fromDate:earliest];
-        earliest = [calendar dateFromComponents:components];
-        
-        components = [calendar components:bigUnits fromDate:latest];
-        latest = [calendar dateFromComponents:components];
+        NSUInteger upToWeeks = NSCalendarUnitTimeZone | NSCalendarUnitDay | NSCalendarUnitWeekOfYear;
 
-        difference = [calendar components:bigUnits fromDate:earliest toDate:latest options:0];
+        difference = [calendar components:upToWeeks fromDate:earliest toDate:latest options:0];
         
-        // if (difference.year >= 1) {
-        //     return [self localizedStringFor:format valueType:YearsAgo value:difference.year];
-        // } else if (difference.month >= 1) {
-        //     return [self localizedStringFor:format valueType:MonthsAgo value:difference.month];
-        // } else if (difference.weekOfYear >= 1) {
-        //     return [self localizedStringFor:format valueType:WeeksAgo value:difference.weekOfYear];
-        // } else {
-        //     return [self localizedStringFor:format valueType:DaysAgo value:difference.day];
-        // }
-		if (difference.weekOfYear >= 1) {
-            return [self localizedStringFor:format valueType:WeeksAgo value:difference.weekOfYear];
-        } else {
-            return [self localizedStringFor:format valueType:DaysAgo value:difference.day];
-        }
+         if (difference.weekOfYear >= 1) {
+             return [self localizedStringFor:format valueType:WeeksAgo value:difference.weekOfYear];
+         } else {
+             return [self localizedStringFor:format valueType:DaysAgo value:difference.day];
+         }
     }
 }
 

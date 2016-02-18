@@ -169,11 +169,16 @@ static NSCalendar *implicitCalendar = nil;
 
         difference = [calendar components:bigUnits fromDate:earliest toDate:latest options:0];
         
-        if (difference.year >= 1) {
-            return [self localizedStringFor:format valueType:YearsAgo value:difference.year];
-        } else if (difference.month >= 1) {
-            return [self localizedStringFor:format valueType:MonthsAgo value:difference.month];
-        } else if (difference.weekOfYear >= 1) {
+        // if (difference.year >= 1) {
+        //     return [self localizedStringFor:format valueType:YearsAgo value:difference.year];
+        // } else if (difference.month >= 1) {
+        //     return [self localizedStringFor:format valueType:MonthsAgo value:difference.month];
+        // } else if (difference.weekOfYear >= 1) {
+        //     return [self localizedStringFor:format valueType:WeeksAgo value:difference.weekOfYear];
+        // } else {
+        //     return [self localizedStringFor:format valueType:DaysAgo value:difference.day];
+        // }
+		if (difference.weekOfYear >= 1) {
             return [self localizedStringFor:format valueType:WeeksAgo value:difference.weekOfYear];
         } else {
             return [self localizedStringFor:format valueType:DaysAgo value:difference.day];
